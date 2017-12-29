@@ -1,0 +1,13 @@
+.header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #4F5D75;
+}
+
+.header-container {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+}

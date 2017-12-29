@@ -1,0 +1,16 @@
+.favorite-filter {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    margin-left: auto;
+    font-size: 16px;
+    background: none;
+    border: none;
+    color: #EF8354;
+}
+
+.favorite-filter__icon {
+    margin-right: 10px;
+}

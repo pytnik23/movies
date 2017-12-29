@@ -1,0 +1,36 @@
+.search {
+    position: relative;
+    width: 300px;
+    max-width: 100%;
+}
+
+.search__input {
+    display: block;
+    width: 100%;
+    padding: 8px 35px 8px 15px;
+    font-size: 16px;
+    font-weight: 300;
+    background: none;
+    border: 1px solid #BFC0C0;
+    border-radius: 999px;
+    color: #fff;
+}
+
+.search__input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+}
+
+.search__input::placeholder {
+    color: #BFC0C0;
+}
+
+.search__button {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    padding: 8px 10px;
+    background: none;
+    border: none;
+    color: #BFC0C0;
+}
