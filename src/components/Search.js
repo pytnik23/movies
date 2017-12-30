@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { fetchMovies } from '../actions';
+import { searchMovies } from '../actions';
 
 import './Search.css';
 
@@ -25,7 +25,7 @@ class Search extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        this.props.fetchMovies(this.state.text);
+        this.props.searchMovies(this.state.text);
     }
 
     render() {
@@ -54,4 +54,4 @@ class Search extends Component {
 
 }
 
-export default connect(null, { fetchMovies })(Search);
+export default connect(null, { searchMovies })(Search);

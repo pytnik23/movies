@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchConfig, saveConfigToStore } from '../actions';
+import { getConfig, saveConfigToStore } from '../actions';
 
 import { loadFromLocalStorage, saveToLocalStorage } from '../utils';
 
@@ -17,7 +17,7 @@ class App extends Component {
         if (config && Date.now() - config.lastFetch < 86400000) {
             this.props.saveConfigToStore(config);
         } else {
-            this.props.fetchConfig()
+            this.props.getConfig()
                 .then(() => saveToLocalStorage('config', this.props.config));
         }
     }
@@ -49,4 +49,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { fetchConfig, saveConfigToStore })(App);
+export default connect(mapStateToProps, { getConfig, saveConfigToStore })(App);

@@ -1,4 +1,12 @@
-import { status, json } from '../utils';
+import {
+    fetchConfig,
+    fetchSearchMovies,
+    fetchPopularMovies,
+    fetchTopMovies,
+    fetchNowPlayingMovies,
+    fetchSimilarMovies,
+    fetchRecommendationsMovies,
+} from '../api';
 
 export const FETCH_CONFIG = 'FETCH_CONFIG';
 export const SAVE_CONFIG = 'SAVE_CONFIG';
@@ -8,14 +16,8 @@ export const SAVE_TO_FAVORITES = 'SAVE_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
 export const TOGGLE_SHOW_FAVORITES = 'TOGGLE_SHOW_FAVORITES';
 
-const API_KEY = '100e19718c5c111cd812c685b760d2c3';
-
-const API_CONFIG_URL = `https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`;
-
-export const fetchConfig = () => dispatch => {
-    return fetch(API_CONFIG_URL, { method: 'GET' })
-    .then(status)
-    .then(json)
+export const getConfig = () => dispatch => {
+    return fetchConfig()
     .then(data => {
         dispatch({
             type: FETCH_CONFIG,
@@ -32,14 +34,10 @@ export const saveConfigToStore = config => {
     };
 };
 
-export const fetchMovies = str => dispatch => {
+export const searchMovies = str => dispatch => {
     dispatch({ type: REQUEST_MOVIES });
 
-    return fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${str}`, {
-        method: 'GET'
-    })
-    .then(status)
-    .then(json)
+    return fetchSearchMovies(str)
     .then(data => {
         dispatch({
             type: RECEIVE_MOVIES,
