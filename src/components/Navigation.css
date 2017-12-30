@@ -1,0 +1,25 @@
+.nav {
+
+}
+
+.nav__list {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.nav__item {
+    display: inline-block;
+}
+
+.nav__item_active {
+    color: #EF8354;
+}
+
+.nav__link {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: inherit;
+}

@@ -15,14 +15,11 @@ const FavoritesFilter = ({ showOnlyFavorites, toggleShowFavorites }) =>  (
         type="button"
         onClick={toggleShowFavorites}
     >
-        <span className="favorite-filter__icon">
-            {
-                showOnlyFavorites
-                ? <MdFavorite size={30} />
-                : <MdFavoriteOutline size={30} />
-            }
-        </span>
-        <span>Favorites</span>
+        {
+            showOnlyFavorites
+            ? <MdFavorite size={24} />
+            : <MdFavoriteOutline size={24} />
+        }
     </button>
 );
 
