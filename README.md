@@ -3,3 +3,4 @@
 Used technologies:
 - React
 - Redux
+- Redux Thunk
