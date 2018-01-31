@@ -1,14 +1,15 @@
+import { Map } from 'immutable';
+
 import { FETCH_CONFIG, SAVE_CONFIG } from '../actions';
 
-export default (state = {}, action) => {
+export default (state = new Map(), action) => {
     switch (action.type) {
         case FETCH_CONFIG:
-            return {
-                ...action.imagesConfig,
-                lastFetch: action.lastFetchDate
-            };
+            return state
+                .merge(action.imagesConfig)
+                .set('lastFetch', action.lastFetchDate);
         case SAVE_CONFIG:
-            return action.config;
+            return state.merge(action.config);
         default:
             return state;
     }

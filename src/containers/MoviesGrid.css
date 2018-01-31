@@ -1,4 +1,4 @@
-.movies-list {
+.movies-grid {
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
@@ -8,7 +8,7 @@
 }
 
 @supports (display: grid) {
-    .movies-list {
+    .movies-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     }

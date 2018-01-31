@@ -1,8 +1,5 @@
-.nav {
-
-}
-
 .nav__list {
+    display: flex;
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
@@ -10,16 +7,15 @@
 }
 
 .nav__item {
-    display: inline-block;
-}
-
-.nav__item_active {
-    color: #EF8354;
+    padding-right: 20px;
 }
 
 .nav__link {
     display: block;
-    padding: 5px 10px;
     text-decoration: none;
     color: inherit;
+}
+
+.nav__link_active {
+    color: #EF8354;
 }

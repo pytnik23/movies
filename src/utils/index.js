@@ -1,15 +1,3 @@
-export const status = res => {
-    if (res.status >= 200 && res.status < 300) {
-        return Promise.resolve(res);
-    } else {
-        return Promise.reject(new Error(res.statusText));
-    }
-}
-
-export const json = res => {
-    return res.json();
-}
-
 export const loadFromLocalStorage = item => {
     try {
         const serializedState = localStorage.getItem(item);

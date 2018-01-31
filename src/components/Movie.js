@@ -3,12 +3,12 @@ import React from 'react';
 import MdFavoriteOutline from 'react-icons/lib/md/favorite-outline';
 import MdFavorite from 'react-icons/lib/md/favorite';
 
-const ListItem = ({
+const Movie = ({
+    id,
     title,
     poster,
     isFavorite,
-    saveToFavorites,
-    removeFromFavorites
+    toggleFavorite,
 }) => (
     <li className="movie">
         <figure className="movie__poster">
@@ -24,7 +24,8 @@ const ListItem = ({
         <button
             className={`movie__button ${isFavorite ? 'movie__button_active' : ''}`}
             type="button"
-            onClick={isFavorite ? removeFromFavorites : saveToFavorites}
+            data-id={id}
+            onClick={toggleFavorite}
         >
             {
                 isFavorite
@@ -35,4 +36,4 @@ const ListItem = ({
     </li>
 );
 
-export default ListItem;
+export default Movie;

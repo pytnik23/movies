@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
-import { connect } from 'react-redux';
-
-import { searchMovies } from '../actions';
-
 import './Search.css';
 
 import MdSearch from 'react-icons/lib/md/search';
 
 class Search extends Component {
     state = {
-        text: ''
+        text: '',
     };
 
     handleChange = e => {
@@ -18,14 +14,14 @@ class Search extends Component {
         const value = e.target.value;
 
         this.setState({
-            [name]: value
+            [name]: value,
         });
     }
 
     handleSubmit = e => {
         e.preventDefault();
 
-        this.props.searchMovies(this.state.text);
+        this.props.onSearch(this.state.text);
     }
 
     render() {
@@ -54,4 +50,4 @@ class Search extends Component {
 
 }
 
-export default connect(null, { searchMovies })(Search);
+export default Search;

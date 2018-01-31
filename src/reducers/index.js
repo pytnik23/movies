@@ -1,7 +1,6 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from 'redux-immutable';
 
 import movies from './movies';
 import config from './config';
-import showOnlyFavorites from './showOnlyFavorites';
 
-export default combineReducers({ movies, config, showOnlyFavorites });
+export default combineReducers({ movies, config });

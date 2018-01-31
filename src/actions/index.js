@@ -1,20 +1,10 @@
-import {
-    fetchConfig,
-    fetchSearchMovies,
-    fetchPopularMovies,
-    fetchTopMovies,
-    fetchNowPlayingMovies,
-    fetchSimilarMovies,
-    fetchRecommendationsMovies,
-} from '../api';
+import { callApi, fetchConfig } from '../api';
 
 export const FETCH_CONFIG = 'FETCH_CONFIG';
 export const SAVE_CONFIG = 'SAVE_CONFIG';
 export const REQUEST_MOVIES = 'REQUEST_MOVIES';
 export const RECEIVE_MOVIES = 'RECEIVE_MOVIES';
-export const SAVE_TO_FAVORITES = 'SAVE_TO_FAVORITES';
-export const REMOVE_FROM_FAVORITES = 'REMOVE_FROM_FAVORITES';
-export const TOGGLE_SHOW_FAVORITES = 'TOGGLE_SHOW_FAVORITES';
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 
 export const getConfig = () => dispatch => {
     return fetchConfig()
@@ -22,47 +12,61 @@ export const getConfig = () => dispatch => {
         dispatch({
             type: FETCH_CONFIG,
             imagesConfig: data,
-            lastFetchDate: Date.now()
+            lastFetchDate: Date.now(),
         });
     })
 };
 
-export const saveConfigToStore = config => {
-    return {
-        type: SAVE_CONFIG,
-        config
-    };
-};
+export const saveConfigToStore = config => ({
+    type: SAVE_CONFIG,
+    config,
+});
+
+export const toggleFavorite = e => ({
+    type: TOGGLE_FAVORITE,
+    id: e.target.dataset.id + '',
+});
 
 export const searchMovies = str => dispatch => {
     dispatch({ type: REQUEST_MOVIES });
 
-    return fetchSearchMovies(str)
+    return callApi({
+        endpoint: '/search/movie',
+        query: str,
+    })
     .then(data => {
         dispatch({
             type: RECEIVE_MOVIES,
-            items: data.results
+            items: data.entities.movies,
         });
     })
 };
 
-export const saveToFavorites = movie => {
-    return {
-        type: SAVE_TO_FAVORITES,
-        movie
-    };
+export const fetchMovies = (page, endpoint) => (dispatch, getState) => {
+    const isNoFetchNeeded = getState().getIn(['movies', page]).size;
+    if (isNoFetchNeeded) return;
+
+    dispatch({ type: REQUEST_MOVIES });
+
+    return callApi({ endpoint })
+    .then(data => {
+        dispatch({
+            type: RECEIVE_MOVIES,
+            page,
+            items: data.entities.movies,
+            ids: data.result,
+        });
+    })
+}
+
+export const fetchPopularMovies = () => {
+    return fetchMovies('popular', '/movie/popular');
 };
 
-export const removeFromFavorites = id => {
-    return {
-        type: REMOVE_FROM_FAVORITES,
-        id
-    };
+export const fetchTopRatedMovies = () => {
+    return fetchMovies('topRated', '/movie/top_rated');
 };
 
-
-export const toggleShowFavorites = () => {
-    return {
-        type: TOGGLE_SHOW_FAVORITES
-    };
+export const fetchNowPlayingMovies = () => {
+    return fetchMovies('nowPlaying', '/movie/now_playing');
 };

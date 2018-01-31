@@ -1,20 +1,17 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-const NavigationItem = ({ children, active = false }) => {
-    let className = 'nav__item';
-
-    if (active) {
-        className += ' nav__item_active';
-    }
-
+const NavigationItem = ({ children, to, exact }) => {
     return (
-        <li className={className}>
-            <a
+        <li className="nav__item">
+            <NavLink
+                exact={exact}
                 className="nav__link"
-                href="#"
+                activeClassName="nav__link_active"
+                to={to}
             >
                 { children }
-            </a>
+            </NavLink>
         </li>
     );
 };

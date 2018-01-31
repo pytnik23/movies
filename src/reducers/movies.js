@@ -1,50 +1,33 @@
+import { Map, List, fromJS } from 'immutable';
+
 import {
     REQUEST_MOVIES,
     RECEIVE_MOVIES,
-    SAVE_TO_FAVORITES,
-    REMOVE_FROM_FAVORITES
+    TOGGLE_FAVORITE,
 } from '../actions';
 
-export default (state = {
+const initialState = new Map({
     isFetching: false,
-    items: [],
-    favoriteItems: []
-}, action) => {
+    items: new Map(),
+    popular: new List(),
+    topRated: new List(),
+    nowPlaying: new List(),
+});
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case REQUEST_MOVIES:
-            return {
-                ...state,
-                isFetching: true
-            };
+            return state.set('isFetching', true);
         case RECEIVE_MOVIES:
-            return {
-                ...state,
-                isFetching: false,
-                items: action.items.map(item => ({...item, isFavorite: false}))
-            };
-        case SAVE_TO_FAVORITES:
-            return {
-                ...state,
-                items: state.items.map(item => {
-                    return item.id === action.movie.id
-                    ? { ...item, isFavorite: true }
-                    : item;
-                }),
-                favoriteItems: [
-                    ...state.favoriteItems,
-                    { ...action.movie, isFavorite: true }
-                ]
-            };
-        case REMOVE_FROM_FAVORITES:
-            return {
-                ...state,
-                items: state.items.map(item => {
-                    return item.id === action.id
-                    ? {...item, isFavorite: false}
-                    : item;
-                }),
-                favoriteItems: state.favoriteItems.filter(item => item.id !== action.id)
-            };
+            return state
+                .set('isFetching', false)
+                .set(action.page, fromJS(action.ids))
+                .mergeIn(['items'], fromJS(action.items));
+        case TOGGLE_FAVORITE:
+            return state.setIn(
+                ['items', action.id, 'isFavorite'],
+                !state.getIn(['items', action.id, 'isFavorite'])
+            );
         default:
             return state;
     }

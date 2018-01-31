@@ -4,3 +4,6 @@ Used technologies:
 - React
 - Redux
 - Redux Thunk
+- React Router 4
+- Normalizr
+- Immutable
