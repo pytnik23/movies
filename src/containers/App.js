@@ -9,11 +9,12 @@ import { getConfig, saveConfigToStore } from '../actions';
 
 import { loadFromLocalStorage, saveToLocalStorage } from '../utils';
 
+import Header from '../components/Header';
 import Popular from '../pages/Popular';
 import TopRated from '../pages/TopRated';
 import NowPlaying from '../pages/NowPlaying';
 import Favorites from '../pages/Favorites';
-import Header from '../components/Header';
+import Movie from './Movie';
 
 class App extends Component {
     componentWillMount() {
@@ -37,11 +38,14 @@ class App extends Component {
             <Router>
                 <div>
                     <Header />
-                    <main className="container">
-                        <Route exact path="/" component={Popular} />
-                        <Route path="/top-rated" component={TopRated} />
-                        <Route path="/now-playing" component={NowPlaying} />
-                        <Route path="/favorites" component={Favorites} />
+                    <main>
+                        <div className="container">
+                            <Route exact path="/" component={Popular} />
+                            <Route path="/top-rated" component={TopRated} />
+                            <Route path="/now-playing" component={NowPlaying} />
+                            <Route path="/favorites" component={Favorites} />
+                        </div>
+                        <Route path="/movie/:id" component={Movie} />
                     </main>
                 </div>
             </Router>

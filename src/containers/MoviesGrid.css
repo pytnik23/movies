@@ -14,70 +14,80 @@
     }
 }
 
-.movie {
+.movies-grid__item {
     position: relative;
 }
 
-.movie::before {
-    display: none;
-    content: '';
+.movies-grid__link {
+    display: block;
+    padding: 20px;
+    border-radius: 3px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.movies-grid__link:hover {
+    background-color: rgba(255,255,255,.05);
+}
+
+.movies-grid__poster {
+    position: relative;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 150%;
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
+
+.movies-grid__poster > img {
     position: absolute;
     top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: rgba(0,0,0,.6);
-}
-
-.movie:hover::before {
-    display: block;
-}
-
-.movie__poster {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(#fff, #BFC0C0);
-}
-
-.movie__image {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.movie__title {
-    visibility: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-align: center;
+.movies-grid__title {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
     font-weight: 300;
 }
 
-.movie:hover .movie__title {
-    visibility: visible;
-}
-
-.movie__button {
-    visibility: hidden;
+.movies-grid__button {
+    display: none;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 30px;
+    right: 0;
     padding: 0;
     background: none;
     border: none;
     color: #EF8354;
 }
 
-.movie__button_active {
-    visibility: visible;
+.movies-grid__item:hover .movies-grid__button,
+.movies-grid__button_active {
+    display: block;
 }
 
-.movie:hover .movie__button {
-    visibility: visible;
+.movies-grid__item-footer {
+    display: flex;
+    align-items: center;
+    color: #4f5d75;
+    font-size: 12px;
+}
+
+.movies-grid__item-year {
+    margin-right: auto;
+    font-size: 13px;
+}
+
+.movies-grid__item-votes-average {
+    margin-right: 3px;
+    color: #ef8354;
 }

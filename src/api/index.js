@@ -28,29 +28,22 @@ export const fetchConfig = () => {
 export const callApi = ({
     method = 'GET',
     endpoint,
-    query
+    params,
 }) => {
     let url = API_BASE + endpoint + '?api_key=' + API_KEY;
-    if (query) {
-        url += '&query=' + query;
+
+    if (params) {
+        for (let key in params) {
+            console.log(key);
+            url += `&${key}=${params[key]}`;
+        }
     }
+
     return fetch(url, { method })
-        .then(status)
-        .then(json)
-        .then(data => {
-            let dataArray = data.results.map(item => ({ ...item, isFavorite: false }));
-            return normalize(dataArray, movieSchema)
-        });
+    .then(status)
+    .then(json)
+    .then(data => {
+        let dataArray = data.results.map(item => ({ ...item, isFavorite: false }));
+        return normalize(dataArray, movieSchema);
+    });
 };
-//
-// export const fetchSimilarMovies = (movie_id) => {
-//     return fetch(`${API_BASE}/movie/${movie_id}/similar?api_key=${API_KEY}`, { method: 'GET' })
-//     .then(status)
-//     .then(json);
-// }
-//
-// export const fetchRecommendationsMovies = (movie_id) => {
-//     return fetch(`${API_BASE}/movie/${movie_id}/recommendations?api_key=${API_KEY}`, { method: 'GET' })
-//     .then(status)
-//     .then(json);
-// }

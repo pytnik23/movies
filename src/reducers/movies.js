@@ -12,6 +12,7 @@ const initialState = new Map({
     popular: new List(),
     topRated: new List(),
     nowPlaying: new List(),
+    search: new List(),
 });
 
 export default (state = initialState, action) => {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import { searchMovies } from '../actions';
+import { fetchSearchMovies } from '../actions';
 
 import Search from '../components/Search';
 
-export default connect(null, { onSearch: searchMovies })(Search);
+export default connect(null, { onSearch: fetchSearchMovies })(Search);

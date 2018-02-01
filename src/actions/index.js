@@ -22,9 +22,9 @@ export const saveConfigToStore = config => ({
     config,
 });
 
-export const toggleFavorite = e => ({
+export const toggleFavorite = id => ({
     type: TOGGLE_FAVORITE,
-    id: e.target.dataset.id + '',
+    id,
 });
 
 export const searchMovies = str => dispatch => {
@@ -42,13 +42,13 @@ export const searchMovies = str => dispatch => {
     })
 };
 
-export const fetchMovies = (page, endpoint) => (dispatch, getState) => {
+export const fetchMovies = (page, endpoint, params) => (dispatch, getState) => {
     const isNoFetchNeeded = getState().getIn(['movies', page]).size;
     if (isNoFetchNeeded) return;
 
     dispatch({ type: REQUEST_MOVIES });
 
-    return callApi({ endpoint })
+    return callApi({ endpoint, params })
     .then(data => {
         dispatch({
             type: RECEIVE_MOVIES,
@@ -69,4 +69,8 @@ export const fetchTopRatedMovies = () => {
 
 export const fetchNowPlayingMovies = () => {
     return fetchMovies('nowPlaying', '/movie/now_playing');
+};
+
+export const fetchSearchMovies = (query) => {
+    return fetchMovies('search', '/search/movie', { query });
 };
