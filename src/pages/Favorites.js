@@ -1,29 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
+import { getFavoriteMovies } from '../selectors';
 
 import PageCaption from '../components/PageCaption';
 import MoviesGrid from '../containers/MoviesGrid';
 
-const getFavorites = movies => {
-    return movies.reduce((ids, movie) => {
-        if (movie.get('isFavorite')) {
-            ids.push(movie.get('id'));
-        }
-        return ids;
-    }, []);
-};
-
-const Favorites = ({ ids }) => (
-    <div>
+const Favorites = () => (
+    <div className="container">
         <PageCaption>
             Favorites movies
         </PageCaption>
-        { !!ids && <MoviesGrid ids={ids} /> }
+        <MoviesGrid getCurrentMovies={getFavoriteMovies} />
     </div>
 );
 
-const mapStateToProps = state => ({
-    ids: getFavorites(state.getIn(['movies', 'items'])),
-});
-
-export default connect(mapStateToProps)(Favorites);
+export default Favorites;

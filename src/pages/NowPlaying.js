@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchNowPlayingMovies } from '../actions';
+import {
+    isMoviesFetching,
+    getNowPlayingMovies,
+} from '../selectors';
 
 import PageCaption from '../components/PageCaption';
 import MoviesGrid from '../containers/MoviesGrid';
@@ -13,13 +17,16 @@ class NowPlaying extends Component {
     }
 
     render() {
-        const { ids, isFetching } = this.props;
+        const { isFetching } = this.props;
+
         return (
-            <div>
+            <div className="container">
                 <PageCaption>
                     Now playing movies
                 </PageCaption>
-                { !!ids && <MoviesGrid ids={ids} /> }
+                <MoviesGrid
+                    getCurrentMovies={getNowPlayingMovies}
+                />
                 { isFetching && <Spinner /> }
             </div>
         );
@@ -27,8 +34,7 @@ class NowPlaying extends Component {
 }
 
 const mapStateToProps = state => ({
-    ids: state.getIn(['movies', 'nowPlaying']),
-    isFetching: state.getIn(['movies', 'isFetching']),
+    isFetching: isMoviesFetching(state),
 });
 
 export default connect(mapStateToProps, { fetchNowPlayingMovies })(NowPlaying);

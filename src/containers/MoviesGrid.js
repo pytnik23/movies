@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { toggleFavorite } from '../actions';
+import { getPosterBase } from '../selectors';
 
 import MovieGridItem from '../components/MovieGridItem';
 
@@ -14,47 +15,36 @@ const getPosterUrl = (posterBase, posterPath) => {
 };
 
 class MoviesGrid extends Component {
-    handleToggleClick = (e) => {
-        e.preventDefault();
-
-        const id = e.target.dataset.id + '';
-
-        this.props.toggleFavorite(id);
-    }
 
     render() {
-        const { ids, movies, posterBase } = this.props;
+        const { movies, posterBase, toggleFavorite } = this.props;
         if (!movies.size) return null;
 
         return (
             <ul className="movies-grid">
                 {
-                    ids.map((id) => {
-                        const stringId = id + '';
-
-                        return (
-                            <MovieGridItem
-                                key={movies.getIn([stringId, 'id'])}
-                                id={movies.getIn([stringId, 'id'])}
-                                title={movies.getIn([stringId, 'original_title'])}
-                                poster={getPosterUrl(posterBase, movies.getIn([stringId, 'poster_path']))}
-                                year={movies.getIn([stringId, 'release_date'])}
-                                voteAverage={movies.getIn([stringId, 'vote_average'])}
-                                voteCount={movies.getIn([stringId, 'vote_count'])}
-                                isFavorite={movies.getIn([stringId, 'isFavorite'])}
-                                onFavoriteClick={this.handleToggleClick}
-                            />
-                        )
-                    })
+                    movies.map(movie => (
+                        <MovieGridItem
+                            key={movie.get('id')}
+                            id={movie.get('id')}
+                            title={movie.get('original_title')}
+                            poster={getPosterUrl(posterBase, movie.get('poster_path'))}
+                            year={movie.get('release_date')}
+                            voteAverage={movie.get('vote_average')}
+                            voteCount={movie.get('vote_count')}
+                            isFavorite={movie.get('isFavorite')}
+                            onFavoriteClick={toggleFavorite}
+                        />
+                    ))
                 }
             </ul>
         );
     }
 };
 
-const mapStateToProps = state => ({
-    posterBase: state.getIn(['config', 'images', 'base_url']) + state.getIn(['config', 'images', 'poster_sizes', 3]),
-    movies: state.getIn(['movies', 'items']),
+const mapStateToProps = (state, ownProps) => ({
+    movies: ownProps.getCurrentMovies(state),
+    posterBase: getPosterBase(state),
 });
 
 export default connect(mapStateToProps, { toggleFavorite })(MoviesGrid);

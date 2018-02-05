@@ -7,3 +7,4 @@ Used technologies:
 - React Router 4
 - Normalizr
 - Immutable
+- Reselect

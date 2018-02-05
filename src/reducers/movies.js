@@ -6,13 +6,13 @@ import {
     TOGGLE_FAVORITE,
 } from '../actions';
 
-const initialState = new Map({
+const initialState = Map({
     isFetching: false,
-    items: new Map(),
-    popular: new List(),
-    topRated: new List(),
-    nowPlaying: new List(),
-    search: new List(),
+    items: Map(),
+    popular: List(),
+    topRated: List(),
+    nowPlaying: List(),
+    search: List(),
 });
 
 export default (state = initialState, action) => {

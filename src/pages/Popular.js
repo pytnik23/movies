@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchPopularMovies } from '../actions';
+import {
+    isMoviesFetching,
+    getPopularMovies,
+} from '../selectors';
 
 import PageCaption from '../components/PageCaption';
 import MoviesGrid from '../containers/MoviesGrid';
@@ -13,14 +17,16 @@ class Popular extends Component {
     }
 
     render() {
-        const { ids, isFetching } = this.props;
-        
+        const { isFetching } = this.props;
+
         return (
-            <div>
+            <div className="container">
                 <PageCaption>
                     Current popular movies
                 </PageCaption>
-                { !!ids && <MoviesGrid ids={ids} /> }
+                <MoviesGrid
+                    getCurrentMovies={getPopularMovies}
+                />
                 { isFetching && <Spinner /> }
             </div>
         );
@@ -28,8 +34,7 @@ class Popular extends Component {
 }
 
 const mapStateToProps = state => ({
-    ids: state.getIn(['movies', 'popular']),
-    isFetching: state.getIn(['movies', 'isFetching']),
+    isFetching: isMoviesFetching(state),
 });
 
 export default connect(mapStateToProps, { fetchPopularMovies })(Popular);
