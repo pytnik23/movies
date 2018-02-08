@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { toggleFavorite } from '../actions';
-import { getPosterBase } from '../selectors';
+import { toggleFavorite } from '../../actions';
+import { getPosterBase } from '../../selectors';
+import { getImageUrl } from '../../utils';
 
-import MovieGridItem from '../components/MovieGridItem';
+import MovieGridItem from './MovieGridItem';
 
-import './MoviesGrid.css';
-
-const getPosterUrl = (posterBase, posterPath) => {
-    if (!posterPath) return null;
-
-    return posterBase + posterPath;
-};
+import './styles.css';
 
 class MoviesGrid extends Component {
 
@@ -28,8 +23,8 @@ class MoviesGrid extends Component {
                             key={movie.get('id')}
                             id={movie.get('id')}
                             title={movie.get('original_title')}
-                            poster={getPosterUrl(posterBase, movie.get('poster_path'))}
-                            year={movie.get('release_date')}
+                            poster={getImageUrl(posterBase, movie.get('poster_path'))}
+                            releaseDate={movie.get('release_date')}
                             voteAverage={movie.get('vote_average')}
                             voteCount={movie.get('vote_count')}
                             isFavorite={movie.get('isFavorite')}

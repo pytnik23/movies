@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavigationItem from './NavigationItem';
 
-import './Navigation.css';
+import './styles.css';
 
 const Navigation = () => (
     <nav className="nav">

@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import MovieYear from '../../components/MovieYear';
+
+import { getBackdropBase } from '../../selectors';
+import { getImageUrl } from '../../utils';
+
+import './styles.css';
+
 const someMovie = {
     release_date: '2014-09-10',
     isFavorite: false,
@@ -25,10 +32,22 @@ const someMovie = {
 
 class Movie extends Component {
     render() {
+        const {
+            title,
+            releaseDate,
+        } = this.props;
         return (
-            <div>
-                <div className="container">
-                    { this.props.match.params.id }
+            <div className="movie">
+                <div className="movie__main-info">
+                    <div className="container">
+                        <h2>{ title }</h2>
+                        <MovieYear releaseDate={releaseDate} />
+                    </div>
+                </div>
+                <div className="movie__content">
+                    <div className="container">
+                        { this.props.match.params.id }
+                    </div>
                 </div>
             </div>
         );
@@ -36,8 +55,13 @@ class Movie extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-    title: someMovie.original_title,
-    year: someMovie.release_date,
+    title: someMovie.title,
+    releaseDate: someMovie.release_date,
+    voteAverage: someMovie.vote_average,
+    voteCount: someMovie.vote_count,
+    overview: someMovie.overview,
+    runtime: someMovie.runtime,
+    backdrop: getImageUrl(getBackdropBase(state), someMovie.backdrop_path),
 });
 
 export default connect(mapStateToProps)(Movie);

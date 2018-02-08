@@ -2,7 +2,7 @@ import React from 'react';
 
 import FaSpinner from 'react-icons/lib/fa/spinner';
 
-import './Spinner.css';
+import './styles.css';
 
 const Spinner = () => (
     <div className="spinner">

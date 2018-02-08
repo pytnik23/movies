@@ -18,3 +18,9 @@ export const saveToLocalStorage = (key, value) => {
         // Ignore write errors.
     }
 }
+
+export const getImageUrl = (imageBase, imagePath) => {
+    if (!imagePath) return null;
+
+    return imageBase + imagePath;
+};

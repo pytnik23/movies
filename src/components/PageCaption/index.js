@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './PageCaption.css';
+import './styles.css';
 
 const PageCaption = ({ children }) => (
     <p className="page-caption">{ children }</p>

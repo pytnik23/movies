@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Search.css';
+import './styles.css';
 
 import MdSearch from 'react-icons/lib/md/search';
 

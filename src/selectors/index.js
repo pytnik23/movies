@@ -1,14 +1,22 @@
 import { createSelector } from 'reselect';
 import { List } from 'immutable';
 
-export const getPosterBaseUrl = state => state.getIn(['config', 'images', 'base_url']);
+export const getImagesBaseUrl = state => state.getIn(['config', 'images', 'base_url']);
 
 export const getPosterSize = state => state.getIn(['config', 'images', 'poster_sizes', 3]);
 
+export const getBackdropSize = state => state.getIn(['config', 'images', 'backdrop_sizes', 3]);
+
 export const getPosterBase = createSelector(
-    getPosterBaseUrl,
+    getImagesBaseUrl,
     getPosterSize,
-    (posterBaseUrl, posterSize) => posterBaseUrl + posterSize
+    (imagesBaseUrl, posterSize) => imagesBaseUrl + posterSize
+);
+
+export const getBackdropBase = createSelector(
+    getImagesBaseUrl,
+    getBackdropSize,
+    (imagesBaseUrl, backdropSize) => imagesBaseUrl + backdropSize
 );
 
 export const isMoviesFetching = state => state.getIn(['movies', 'isFetching']);

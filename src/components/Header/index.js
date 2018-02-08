@@ -1,9 +1,9 @@
 import React from 'react';
 
-import MovieSearch from '../containers/MovieSearch';
-import Navigation from './Navigation';
+import MovieSearch from '../../containers/MovieSearch';
+import Navigation from '../Navigation';
 
-import './Header.css';
+import './styles.css';
 
 const Header = () => (
     <header className="header">
