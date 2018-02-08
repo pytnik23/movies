@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { fetchPopularMovies } from '../actions';
 import {
@@ -32,6 +33,11 @@ class Popular extends Component {
         );
     }
 }
+
+Popular.propTypes = {
+    isFetching: PropTypes.bool.isRequired,
+    fetchPopularMovies: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
     isFetching: isMoviesFetching(state),

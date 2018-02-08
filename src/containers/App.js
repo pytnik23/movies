@@ -4,6 +4,7 @@ import {
     BrowserRouter as Router,
     Route,
 } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import { getConfig, saveConfigToStore } from '../actions';
 
@@ -50,6 +51,12 @@ class App extends Component {
         );
     }
 }
+
+App.propTypes = {
+    config: PropTypes.object,
+    getConfig: PropTypes.func,
+    saveConfigToStore: PropTypes.func,
+};
 
 const mapStateToProps = state => ({
     config: state.get('config'),

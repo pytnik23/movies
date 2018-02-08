@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.css';
 
@@ -47,7 +48,10 @@ class Search extends Component {
             </form>
         );
     }
-
 }
+
+Search.propTypes = {
+    onSearch: PropTypes.func.isRequired,
+};
 
 export default Search;

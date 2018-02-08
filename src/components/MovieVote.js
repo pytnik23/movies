@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const MovieVote = ({ average, count }) => (
     <div>
@@ -7,5 +8,10 @@ const MovieVote = ({ average, count }) => (
         <span>{`(${count})`}</span>
     </div>
 );
+
+MovieVote.propTypes = {
+    average: PropTypes.number.isRequired,
+    count: PropTypes.number.isRequired,
+};
 
 export default MovieVote;

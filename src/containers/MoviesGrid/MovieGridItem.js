@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import MoviePoster from '../../components/MoviePoster';
 import MovieYear from '../../components/MovieYear';
@@ -58,5 +59,16 @@ class MovieGridItem extends Component {
         );
     }
 }
+
+MovieGridItem.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    poster: PropTypes.string,
+    releaseDate: PropTypes.string.isRequired,
+    voteAverage: PropTypes.number.isRequired,
+    voteCount: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    onFavoriteClick: PropTypes.func.isRequired,
+};
 
 export default MovieGridItem;
