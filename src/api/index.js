@@ -1,7 +1,3 @@
-import { normalize } from 'normalizr';
-
-import movieSchema from './schemas';
-
 const API_KEY = '100e19718c5c111cd812c685b760d2c3';
 
 const API_BASE = 'https://api.themoviedb.org/3';
@@ -42,8 +38,5 @@ export const callApi = ({
     return fetch(url, { method })
     .then(status)
     .then(json)
-    .then(data => {
-        let dataArray = data.results.map(item => ({ ...item, isFavorite: false }));
-        return normalize(dataArray, movieSchema);
-    });
+    .then(data => data);
 };

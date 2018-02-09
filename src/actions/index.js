@@ -1,9 +1,15 @@
 import { callApi, fetchConfig } from '../api';
 
+import { normalize } from 'normalizr';
+
+import movieSchema from '../api/schemas';
+
 export const FETCH_CONFIG = 'FETCH_CONFIG';
 export const SAVE_CONFIG = 'SAVE_CONFIG';
 export const REQUEST_MOVIES = 'REQUEST_MOVIES';
 export const RECEIVE_MOVIES = 'RECEIVE_MOVIES';
+export const REQUEST_MOVIE_DETAILS = 'REQUEST_MOVIE_DETAILS';
+export const RECEIVE_MOVIE_DETAILS = 'RECEIVE_MOVIE_DETAILS';
 export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 
 export const getConfig = () => dispatch => {
@@ -30,7 +36,7 @@ export const toggleFavorite = id => ({
 export const searchMovies = str => dispatch => {
     dispatch({ type: REQUEST_MOVIES });
 
-    return callApi({
+    callApi({
         endpoint: '/search/movie',
         query: str,
     })
@@ -48,13 +54,19 @@ export const fetchMovies = (page, endpoint, params) => (dispatch, getState) => {
 
     dispatch({ type: REQUEST_MOVIES });
 
-    return callApi({ endpoint, params })
+    callApi({ endpoint, params })
     .then(data => {
+        const dataArray = data.results.map(item => ({
+            ...item,
+            isFavorite: false,
+        }));
+        const normalizeData = normalize(dataArray, movieSchema);
+
         dispatch({
             type: RECEIVE_MOVIES,
             page,
-            items: data.entities.movies,
-            ids: data.result,
+            items: normalizeData.entities.movies,
+            ids: normalizeData.result,
         });
     })
 }
@@ -73,4 +85,20 @@ export const fetchNowPlayingMovies = () => {
 
 export const fetchSearchMovies = (query) => {
     return fetchMovies('search', '/search/movie', { query });
+};
+
+export const fetchMovieDetails = (id) => (dispatch) => {
+    dispatch({
+        type: REQUEST_MOVIE_DETAILS,
+        id,
+    });
+
+    callApi({ endpoint: `/movie/${id}` })
+    .then(data => {
+        dispatch({
+            type: RECEIVE_MOVIE_DETAILS,
+            movie: data,
+            id,
+        });
+    });
 };

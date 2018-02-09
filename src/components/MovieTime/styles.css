@@ -1,0 +1,8 @@
+.movie-time {
+    display: flex;
+    align-items: center;
+}
+
+.movie-time__icon {
+    margin-right: 5px;
+}

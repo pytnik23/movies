@@ -1,0 +1,85 @@
+.movie {
+    line-height: 1.4;
+    color: #bfc0c0;
+}
+
+.movie__main-info {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 30px;
+}
+
+.movie__backdrop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+.movie__backdrop::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.6);
+}
+
+.movie__content {
+    position: relative;
+}
+
+.movie__row {
+    display: flex;
+}
+
+.movie__left-col {
+    position: relative;
+    flex: 0 0 250px;
+    margin-right: 30px;
+}
+
+.movie__right-col {
+    flex-grow: 1;
+}
+
+.movie__poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.movie__title {
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1;
+    font-size: 40px;
+    text-shadow: 0 0 2px rgba(0,0,0,.5);
+    color: #fff;
+}
+
+.movie__subtitle {
+    color: #fff;
+}
+
+.movie__overview {
+    line-height: 1.6;
+}
+
+.movie__time {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.movie__imdb-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}

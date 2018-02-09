@@ -24,3 +24,16 @@ export const getImageUrl = (imageBase, imagePath) => {
 
     return imageBase + imagePath;
 };
+
+export const formatPrice = (price) => {
+    return price
+    .toString()
+    .split('')
+    .reverse()
+    .reduce((res, letter, idx) => {
+        !idx || (idx % 3) ? res.push(letter) : res.push(letter + ',');
+        return res;
+    }, [])
+    .reverse()
+    .join('');
+};

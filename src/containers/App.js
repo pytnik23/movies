@@ -15,7 +15,7 @@ import Popular from '../pages/Popular';
 import TopRated from '../pages/TopRated';
 import NowPlaying from '../pages/NowPlaying';
 import Favorites from '../pages/Favorites';
-import Movie from '../pages/Movie';
+import MoviePage from '../pages/MoviePage';
 
 class App extends Component {
     componentWillMount() {
@@ -44,7 +44,7 @@ class App extends Component {
                         <Route path="/top-rated" component={TopRated} />
                         <Route path="/now-playing" component={NowPlaying} />
                         <Route path="/favorites" component={Favorites} />
-                        <Route path="/movie/:id" component={Movie} />
+                        <Route path="/movie/:id" component={MoviePage} />
                     </main>
                 </div>
             </Router>
