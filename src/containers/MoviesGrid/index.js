@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 
-import { toggleFavorite } from '../../actions';
 import { getPosterBase } from '../../selectors';
 import { getImageUrl } from '../../utils';
 
@@ -13,7 +12,7 @@ import './styles.css';
 
 class MoviesGrid extends Component {
     render() {
-        const { movies, posterBase, toggleFavorite } = this.props;
+        const { movies, posterBase } = this.props;
         if (!movies.size) return null;
 
         return (
@@ -29,7 +28,6 @@ class MoviesGrid extends Component {
                             voteAverage={movie.get('vote_average')}
                             voteCount={movie.get('vote_count')}
                             isFavorite={movie.get('isFavorite')}
-                            onFavoriteClick={toggleFavorite}
                         />
                     ))
                 }
@@ -41,7 +39,6 @@ class MoviesGrid extends Component {
 MoviesGrid.propTypes = {
     movies: ImmutablePropTypes.list.isRequired,
     posterBase: PropTypes.string.isRequired,
-    toggleFavorite: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => ({
@@ -49,4 +46,4 @@ const mapStateToProps = (state, ownProps) => ({
     posterBase: getPosterBase(state),
 });
 
-export default connect(mapStateToProps, { toggleFavorite })(MoviesGrid);
+export default connect(mapStateToProps)(MoviesGrid);

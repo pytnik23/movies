@@ -9,6 +9,10 @@
     padding-bottom: 30px;
 }
 
+.movie__additional-info {
+    position: relative;
+}
+
 .movie__backdrop {
     position: absolute;
     top: 0;
@@ -82,4 +86,11 @@
     display: inline-block;
     margin-top: 10px;
     font-size: 14px;
+}
+
+.movie__favorite-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%);
 }

@@ -30,7 +30,7 @@ export const saveConfigToStore = config => ({
 
 export const toggleFavorite = id => ({
     type: TOGGLE_FAVORITE,
-    id,
+    id: id + '',
 });
 
 export const searchMovies = str => dispatch => {

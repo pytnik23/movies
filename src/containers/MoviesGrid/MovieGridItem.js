@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,58 +7,45 @@ import MovieYear from '../../components/MovieYear';
 import MovieVote from '../../components/MovieVote';
 import FavoriteButton from '../../components/FavoriteButton';
 
-class MovieGridItem extends Component {
-    handleFavoriteClick = (e) => {
-        e.preventDefault();
-
-        this.props.onFavoriteClick(this.props.id + '');
-    }
-
-    render() {
-        const {
-            id,
-            title,
-            poster,
-            releaseDate,
-            voteAverage,
-            voteCount,
-            isFavorite,
-        } = this.props;
-
-        return (
-            <li className="movies-grid__item">
-                <Link
-                    to={`/movie/${id}`}
-                    className="movies-grid__link"
-                >
-                    <MoviePoster
-                        poster={poster}
-                        title={title}
-                    />
-                    <h3
-                        className="movies-grid__title"
-                        title={title}
-                    >
-                        {title}
-                    </h3>
-                    <div className="movies-grid__item-footer">
-                        <MovieYear releaseDate={releaseDate} />
-                        <MovieVote
-                            average={voteAverage}
-                            count={voteCount}
-                        />
-                    </div>
-                    <FavoriteButton
-                        className={`movies-grid__button ${isFavorite ? 'movies-grid__button_active' : ''}`}
-                        active={isFavorite}
-                        id={id}
-                        onClick={this.handleFavoriteClick}
-                    />
-                </Link>
-            </li>
-        );
-    }
-}
+const MovieGridItem = ({
+    id,
+    title,
+    poster,
+    releaseDate,
+    voteAverage,
+    voteCount,
+    isFavorite,
+}) =>  (
+    <li className="movies-grid__item">
+        <Link
+            to={`/movie/${id}`}
+            className="movies-grid__link"
+        >
+            <MoviePoster
+                poster={poster}
+                title={title}
+            />
+            <h3
+                className="movies-grid__title"
+                title={title}
+            >
+                {title}
+            </h3>
+            <div className="movies-grid__item-footer">
+                <MovieYear releaseDate={releaseDate} />
+                <MovieVote
+                    average={voteAverage}
+                    count={voteCount}
+                />
+            </div>
+            <FavoriteButton
+                className={`movies-grid__button ${isFavorite ? 'movies-grid__button_active' : ''}`}
+                id={id}
+                active={isFavorite}
+            />
+        </Link>
+    </li>
+);
 
 MovieGridItem.propTypes = {
     id: PropTypes.number.isRequired,
@@ -68,7 +55,6 @@ MovieGridItem.propTypes = {
     voteAverage: PropTypes.number.isRequired,
     voteCount: PropTypes.number.isRequired,
     isFavorite: PropTypes.bool.isRequired,
-    onFavoriteClick: PropTypes.func.isRequired,
 };
 
 export default MovieGridItem;

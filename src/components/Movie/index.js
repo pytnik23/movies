@@ -6,6 +6,7 @@ import MovieYear from '../MovieYear';
 import MovieTime from '../MovieTime';
 import MovieVote from '../MovieVote';
 import MoviePoster from '../MoviePoster';
+import FavoriteButton from '../FavoriteButton';
 
 import {
     getMovies,
@@ -24,6 +25,7 @@ class Movie extends Component {
 
     render() {
         const {
+            id,
             title,
             releaseDate,
             voteAverage,
@@ -35,6 +37,7 @@ class Movie extends Component {
             budget,
             revenue,
             imdbId,
+            isFavorite,
         } = this.props;
 
         return (
@@ -80,14 +83,20 @@ class Movie extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="movie__row">
-                        <div className="movie__left-col">
-
+                    <div className="movie__additional-info">
+                        <div className="movie__row">
+                            <div className="movie__left-col"></div>
+                            <div className="movie__right-col">
+                                <h3 className="movie__subtitle">Overview</h3>
+                                <p className="movie__overview">{ overview }</p>
+                            </div>
                         </div>
-                        <div className="movie__right-col">
-                            <h3 className="movie__subtitle">Overview</h3>
-                            <p className="movie__overview">{ overview }</p>
-                        </div>
+                        <FavoriteButton
+                            className="movie__favorite-button"
+                            id={id}
+                            size={40}
+                            active={isFavorite}
+                        />
                     </div>
                 </div>
             </div>
@@ -108,6 +117,7 @@ Movie.propTypes = {
     budget: PropTypes.string,
     revenue: PropTypes.string,
     imdbId: PropTypes.string,
+    isFavorite: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -126,6 +136,7 @@ const mapStateToProps = (state, ownProps) => {
         budget: formatPrice(movie.get('budget')),
         revenue: formatPrice(movie.get('revenue')),
         imdbId: movie.get('imdb_id'),
+        isFavorite: !!movie.get('isFavorite'),
     }
 };
 
