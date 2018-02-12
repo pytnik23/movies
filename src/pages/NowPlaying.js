@@ -1,46 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-import { fetchNowPlayingMovies } from '../actions';
-import {
-    isMoviesFetching,
-    getNowPlayingMovies,
-} from '../selectors';
+import Movies from '../containers/Movies';
 
-import PageCaption from '../components/PageCaption';
-import MoviesGrid from '../containers/MoviesGrid';
-import Spinner from '../components/Spinner';
+const NowPlaying = () => <Movies
+    page="nowPlaying"
+    title="Now playing movies"
+/>;
 
-class NowPlaying extends Component {
-    componentWillMount() {
-        this.props.fetchNowPlayingMovies();
-    }
-
-    render() {
-        const { isFetching } = this.props;
-
-        return (
-            <div className="container">
-                <PageCaption>
-                    Now playing movies
-                </PageCaption>
-                <MoviesGrid
-                    getCurrentMovies={getNowPlayingMovies}
-                />
-                { isFetching && <Spinner /> }
-            </div>
-        );
-    }
-}
-
-NowPlaying.propTypes = {
-    isFetching: PropTypes.bool.isRequired,
-    fetchNowPlayingMovies: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = state => ({
-    isFetching: isMoviesFetching(state),
-});
-
-export default connect(mapStateToProps, { fetchNowPlayingMovies })(NowPlaying);
+export default NowPlaying;

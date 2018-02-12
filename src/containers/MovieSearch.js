@@ -1,7 +1,21 @@
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+import { withRouter } from "react-router-dom";
 
-import { fetchSearchMovies } from '../actions';
 
 import Search from '../components/Search';
 
-export default connect(null, { onSearch: fetchSearchMovies })(Search);
+class MovieSearch extends Component {
+
+    handleSearch = (query) => {
+        this.props.history.push(`/movies/${query}`);
+    }
+
+    render() {
+        return (
+            <Search onSearch={this.handleSearch} />
+        );
+    }
+
+}
+
+export default withRouter(MovieSearch);

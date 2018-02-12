@@ -15,6 +15,7 @@ import Popular from '../pages/Popular';
 import TopRated from '../pages/TopRated';
 import NowPlaying from '../pages/NowPlaying';
 import Favorites from '../pages/Favorites';
+import SearchPage from '../pages/SearchPage';
 import MoviePage from '../pages/MoviePage';
 
 class App extends Component {
@@ -44,6 +45,7 @@ class App extends Component {
                         <Route path="/top-rated" component={TopRated} />
                         <Route path="/now-playing" component={NowPlaying} />
                         <Route path="/favorites" component={Favorites} />
+                        <Route path="/movies/:search" component={SearchPage} />
                         <Route path="/movie/:id" component={MoviePage} />
                     </main>
                 </div>

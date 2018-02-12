@@ -55,3 +55,11 @@ export const getFavoriteMovies = createSelector(
         return favoriteMovies;
     }, []))
 );
+
+export const getSearchMoviesIds = state => state.getIn(['movies', 'search']);
+
+export const getSearchMovies = createSelector(
+    getSearchMoviesIds,
+    getMovies,
+    (searchMoviesIds, movies) => searchMoviesIds.map(id => movies.get(id + ''))
+);

@@ -41,8 +41,7 @@ MoviesGrid.propTypes = {
     posterBase: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => ({
-    movies: ownProps.getCurrentMovies(state),
+const mapStateToProps = (state) => ({
     posterBase: getPosterBase(state),
 });
 

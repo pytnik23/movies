@@ -1,46 +1,10 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from 'react';
 
-import { fetchPopularMovies } from '../actions';
-import {
-    isMoviesFetching,
-    getPopularMovies,
-} from '../selectors';
+import Movies from '../containers/Movies';
 
-import PageCaption from '../components/PageCaption';
-import MoviesGrid from '../containers/MoviesGrid';
-import Spinner from '../components/Spinner';
+const Popular = () => <Movies
+    page="popular"
+    title="Current popular movies"
+/>;
 
-class Popular extends Component {
-    componentWillMount() {
-        this.props.fetchPopularMovies();
-    }
-
-    render() {
-        const { isFetching } = this.props;
-
-        return (
-            <div className="container">
-                <PageCaption>
-                    Current popular movies
-                </PageCaption>
-                <MoviesGrid
-                    getCurrentMovies={getPopularMovies}
-                />
-                { isFetching && <Spinner /> }
-            </div>
-        );
-    }
-}
-
-Popular.propTypes = {
-    isFetching: PropTypes.bool.isRequired,
-    fetchPopularMovies: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = state => ({
-    isFetching: isMoviesFetching(state),
-});
-
-export default connect(mapStateToProps, { fetchPopularMovies })(Popular);
+export default Popular;

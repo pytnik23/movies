@@ -26,14 +26,7 @@ export const callApi = ({
     endpoint,
     params,
 }) => {
-    let url = API_BASE + endpoint + '?api_key=' + API_KEY;
-
-    if (params) {
-        for (let key in params) {
-            console.log(key);
-            url += `&${key}=${params[key]}`;
-        }
-    }
+    let url = API_BASE + endpoint + '?api_key=' + API_KEY + params;
 
     return fetch(url, { method })
     .then(status)

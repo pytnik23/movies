@@ -48,9 +48,26 @@ export const searchMovies = str => dispatch => {
     })
 };
 
-export const fetchMovies = (page, endpoint, params) => (dispatch, getState) => {
+const getEndpoint = page => {
+    switch (page) {
+        case 'popular':
+            return '/movie/popular';
+        case 'topRated':
+            return '/movie/top_rated';
+        case 'nowPlaying':
+            return '/movie/now_playing';
+        case 'search':
+            return '/search/movie';
+        default:
+            return '/';
+    }
+}
+
+export const fetchMovies = (page, params) => (dispatch, getState) => {
     const isNoFetchNeeded = getState().getIn(['movies', page]).size;
     if (isNoFetchNeeded) return;
+
+    const endpoint = getEndpoint(page);
 
     dispatch({ type: REQUEST_MOVIES });
 
@@ -70,22 +87,6 @@ export const fetchMovies = (page, endpoint, params) => (dispatch, getState) => {
         });
     })
 }
-
-export const fetchPopularMovies = () => {
-    return fetchMovies('popular', '/movie/popular');
-};
-
-export const fetchTopRatedMovies = () => {
-    return fetchMovies('topRated', '/movie/top_rated');
-};
-
-export const fetchNowPlayingMovies = () => {
-    return fetchMovies('nowPlaying', '/movie/now_playing');
-};
-
-export const fetchSearchMovies = (query) => {
-    return fetchMovies('search', '/search/movie', { query });
-};
 
 export const fetchMovieDetails = (id) => (dispatch) => {
     dispatch({

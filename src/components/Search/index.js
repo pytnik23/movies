@@ -23,6 +23,11 @@ class Search extends Component {
         e.preventDefault();
 
         this.props.onSearch(this.state.text);
+        this.resetInput();
+    }
+
+    resetInput = () => {
+        this.setState({ text: '' });
     }
 
     render() {
