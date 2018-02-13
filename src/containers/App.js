@@ -16,7 +16,7 @@ import Favorites from '../pages/Favorites';
 import SearchPage from '../pages/SearchPage';
 import MoviePage from '../pages/MoviePage';
 
-const history = createBrowserHistory();
+const history = createBrowserHistory({ basename: process.env.PUBLIC_URL });
 
 class App extends Component {
     componentWillMount() {
