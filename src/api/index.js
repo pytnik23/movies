@@ -24,7 +24,7 @@ export const fetchConfig = () => {
 export const callApi = ({
     method = 'GET',
     endpoint,
-    params,
+    params = '',
 }) => {
     let url = API_BASE + endpoint + '?api_key=' + API_KEY + params;
 

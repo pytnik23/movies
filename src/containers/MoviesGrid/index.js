@@ -27,7 +27,7 @@ class MoviesGrid extends Component {
                             releaseDate={movie.get('release_date')}
                             voteAverage={movie.get('vote_average')}
                             voteCount={movie.get('vote_count')}
-                            isFavorite={movie.get('isFavorite')}
+                            isFavorite={!!movie.get('isFavorite')}
                         />
                     ))
                 }

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-    BrowserRouter as Router,
-    Route,
-} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Router, Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import { getConfig, saveConfigToStore } from '../actions';
 
@@ -17,6 +15,8 @@ import NowPlaying from '../pages/NowPlaying';
 import Favorites from '../pages/Favorites';
 import SearchPage from '../pages/SearchPage';
 import MoviePage from '../pages/MoviePage';
+
+const history = createBrowserHistory();
 
 class App extends Component {
     componentWillMount() {
@@ -37,7 +37,7 @@ class App extends Component {
 
     render() {
         return (
-            <Router>
+            <Router history={history}>
                 <div>
                     <Header />
                     <main>

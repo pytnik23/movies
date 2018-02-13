@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -21,88 +21,81 @@ import {
 
 import './styles.css';
 
-class Movie extends Component {
-
-    render() {
-        const {
-            id,
-            title,
-            releaseDate,
-            voteAverage,
-            voteCount,
-            poster,
-            backdrop,
-            overview,
-            runtime,
-            budget,
-            revenue,
-            imdbId,
-            isFavorite,
-        } = this.props;
-
-        return (
-            <div className="movie">
-                <div className="movie__main-info">
-                    <div
-                        className="movie__backdrop"
-                        style={{ backgroundImage: `url(${backdrop})` } }
-                    ></div>
-                    <div className="movie__content">
-                        <div className="container">
-                            <div className="movie__row">
-                                <div className="movie__left-col">
-                                    <MoviePoster
-                                        poster={poster}
-                                        title={title}
-                                        className="movie__poster"
-                                    />
-                                </div>
-                                <div className="movie__right-col">
-                                    <MovieYear releaseDate={releaseDate} />
-                                    <h2 className="movie__title">{ title }</h2>
-                                    <MovieVote
-                                        average={voteAverage}
-                                        count={voteCount}
-                                    />
-                                    <MovieTime
-                                        time={runtime}
-                                        className="movie__time"
-                                    />
-                                    <div>Budget: {budget}</div>
-                                    <div>Revenue: {revenue}</div>
-                                    <a
-                                        href={`http://www.imdb.com/title/${imdbId}`}
-                                        target="_blank"
-                                        className="movie__imdb-link"
-                                    >
-                                        Go to IMDB
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+const Movie = ({
+    id,
+    title,
+    releaseDate,
+    voteAverage,
+    voteCount,
+    poster,
+    backdrop,
+    overview,
+    runtime,
+    budget,
+    revenue,
+    imdbId,
+    isFavorite,
+}) => (
+    <div className="movie">
+        <div className="movie__main-info">
+            <div
+                className="movie__backdrop"
+                style={{ backgroundImage: `url(${backdrop})` } }
+            ></div>
+            <div className="movie__content">
                 <div className="container">
-                    <div className="movie__additional-info">
-                        <div className="movie__row">
-                            <div className="movie__left-col"></div>
-                            <div className="movie__right-col">
-                                <h3 className="movie__subtitle">Overview</h3>
-                                <p className="movie__overview">{ overview }</p>
-                            </div>
+                    <div className="movie__row">
+                        <div className="movie__left-col">
+                            <MoviePoster
+                                poster={poster}
+                                title={title}
+                                className="movie__poster"
+                            />
                         </div>
-                        <FavoriteButton
-                            className="movie__favorite-button"
-                            id={id}
-                            size={40}
-                            active={isFavorite}
-                        />
+                        <div className="movie__right-col">
+                            <MovieYear releaseDate={releaseDate} />
+                            <h2 className="movie__title">{ title }</h2>
+                            <MovieVote
+                                average={voteAverage}
+                                count={voteCount}
+                            />
+                            <MovieTime
+                                time={runtime}
+                                className="movie__time"
+                            />
+                            <div>Budget: {budget}</div>
+                            <div>Revenue: {revenue}</div>
+                            <a
+                                href={`http://www.imdb.com/title/${imdbId}`}
+                                target="_blank"
+                                className="movie__imdb-link"
+                            >
+                                Go to IMDB
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+        <div className="container">
+            <div className="movie__additional-info">
+                <div className="movie__row">
+                    <div className="movie__left-col"></div>
+                    <div className="movie__right-col">
+                        <h3 className="movie__subtitle">Overview</h3>
+                        <p className="movie__overview">{ overview }</p>
+                    </div>
+                </div>
+                <FavoriteButton
+                    className="movie__favorite-button"
+                    id={id}
+                    size={40}
+                    active={isFavorite}
+                />
+            </div>
+        </div>
+    </div>
+);
 
 Movie.propTypes = {
     id: PropTypes.number.isRequired,

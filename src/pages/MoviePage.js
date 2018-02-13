@@ -10,7 +10,9 @@ import { getMovies } from '../selectors';
 
 class MoviePage extends Component {
     componentWillMount() {
-        this.props.fetchMovieDetails(this.props.id);
+        if (!this.props.isMovieFetched) {
+            this.props.fetchMovieDetails(this.props.id);
+        }
     }
 
     render() {

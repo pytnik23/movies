@@ -33,21 +33,6 @@ export const toggleFavorite = id => ({
     id: id + '',
 });
 
-export const searchMovies = str => dispatch => {
-    dispatch({ type: REQUEST_MOVIES });
-
-    callApi({
-        endpoint: '/search/movie',
-        query: str,
-    })
-    .then(data => {
-        dispatch({
-            type: RECEIVE_MOVIES,
-            items: data.entities.movies,
-        });
-    })
-};
-
 const getEndpoint = page => {
     switch (page) {
         case 'popular':
@@ -64,8 +49,6 @@ const getEndpoint = page => {
 }
 
 export const fetchMovies = (page, params) => (dispatch, getState) => {
-    const isNoFetchNeeded = getState().getIn(['movies', page]).size;
-    if (isNoFetchNeeded) return;
 
     const endpoint = getEndpoint(page);
 
@@ -73,11 +56,7 @@ export const fetchMovies = (page, params) => (dispatch, getState) => {
 
     callApi({ endpoint, params })
     .then(data => {
-        const dataArray = data.results.map(item => ({
-            ...item,
-            isFavorite: false,
-        }));
-        const normalizeData = normalize(dataArray, movieSchema);
+        const normalizeData = normalize(data.results, movieSchema);
 
         dispatch({
             type: RECEIVE_MOVIES,
