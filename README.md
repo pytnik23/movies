@@ -8,3 +8,5 @@ Used technologies:
 - Normalizr
 - Immutable
 - Reselect
+- Mocha
+- Chai
