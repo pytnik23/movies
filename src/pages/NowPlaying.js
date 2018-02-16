@@ -8,9 +8,11 @@ import { getNowPlayingMovies } from '../selectors';
 
 import Movies from '../containers/Movies';
 
-class Popular extends Component {
-    componentWillMount() {
-        this.props.fetchMovies('nowPlaying');
+class NowPlaying extends Component {
+    componentDidMount() {
+        if (!this.props.movies.size) {
+            this.props.fetchMovies('nowPlaying');
+        }
     }
 
     render() {
@@ -23,7 +25,7 @@ class Popular extends Component {
     }
 }
 
-Popular.propTypes = {
+NowPlaying.propTypes = {
     movies: ImmutablePropTypes.list.isRequired,
     fetchMovies: PropTypes.func.isRequired,
 };
@@ -32,4 +34,4 @@ const mapStateToProps = state => ({
     movies: getNowPlayingMovies(state),
 });
 
-export default connect(mapStateToProps, { fetchMovies })(Popular);
+export default connect(mapStateToProps, { fetchMovies })(NowPlaying);

@@ -9,8 +9,7 @@ import { getSearchMovies } from '../selectors';
 import Movies from '../containers/Movies';
 
 class SearchPage extends Component {
-
-    componentDidMount() {
+    componentWillMount() {
         this.fetchSearchMovies(this.props.match.params.search);
     }
 

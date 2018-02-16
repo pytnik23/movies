@@ -22,8 +22,10 @@ class Search extends Component {
     handleSubmit = e => {
         e.preventDefault();
 
-        this.props.onSearch(this.state.text);
-        this.resetInput();
+        if (this.state.text) {
+            this.props.onSearch(this.state.text);
+            this.resetInput();
+        }
     }
 
     resetInput = () => {

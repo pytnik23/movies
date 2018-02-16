@@ -54,7 +54,7 @@ export const fetchMovies = (page, params) => (dispatch, getState) => {
 
     dispatch({ type: REQUEST_MOVIES });
 
-    callApi({ endpoint, params })
+    return callApi({ endpoint, params })
     .then(data => {
         const normalizeData = normalize(data.results, movieSchema);
 
@@ -73,7 +73,7 @@ export const fetchMovieDetails = (id) => (dispatch) => {
         id,
     });
 
-    callApi({ endpoint: `/movie/${id}` })
+    return callApi({ endpoint: `/movie/${id}` })
     .then(data => {
         dispatch({
             type: RECEIVE_MOVIE_DETAILS,

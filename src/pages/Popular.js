@@ -9,8 +9,10 @@ import { getPopularMovies } from '../selectors';
 import Movies from '../containers/Movies';
 
 class Popular extends Component {
-    componentWillMount() {
-        this.props.fetchMovies('popular');
+    componentDidMount() {
+        if (!this.props.movies.size) {
+            this.props.fetchMovies('popular');
+        }
     }
 
     render() {

@@ -20,12 +20,18 @@ export const saveToLocalStorage = (key, value) => {
 }
 
 export const getImageUrl = (imageBase, imagePath) => {
-    if (!imagePath) return null;
+    if (!imagePath || !imageBase) return null;
 
     return imageBase + imagePath;
 };
 
 export const formatPrice = (price) => {
+    if (typeof price !== 'number') {
+        throw new Error('"price" should be typeof number');
+    }
+
+    if (price < 1000) return price.toString();
+
     return price
     .toString()
     .split('')
