@@ -36,6 +36,10 @@ class MoviesGrid extends Component {
     }
 };
 
+MoviesGrid.defaultProps = {
+    posterBase: '',
+};
+
 MoviesGrid.propTypes = {
     movies: ImmutablePropTypes.list.isRequired,
     posterBase: PropTypes.string.isRequired,

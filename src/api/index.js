@@ -1,7 +1,9 @@
-const API_KEY = '100e19718c5c111cd812c685b760d2c3';
+import fetch from 'node-fetch';
 
-const API_BASE = 'https://api.themoviedb.org/3';
-const API_CONFIG_URL = `${API_BASE}/configuration?api_key=${API_KEY}`;
+export const API_KEY = '100e19718c5c111cd812c685b760d2c3';
+
+export const API_BASE = 'https://api.themoviedb.org/3';
+export const API_CONFIG_URL = `${API_BASE}/configuration?api_key=${API_KEY}`;
 
 const status = res => {
     if (res.status >= 200 && res.status < 300) {
