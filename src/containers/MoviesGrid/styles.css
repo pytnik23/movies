@@ -60,3 +60,9 @@
     color: #4f5d75;
     font-size: 12px;
 }
+
+@media only screen and (max-width: 1199px) {
+    .movies-grid__button {
+        display: block;
+    }
+}

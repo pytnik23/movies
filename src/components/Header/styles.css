@@ -1,16 +1,18 @@
 .header {
     position: relative;
     z-index: 100;
-    padding-top: 10px;
-    padding-bottom: 10px;
     background-color: #4F5D75;
     box-shadow: 0 0 2px rgba(0,0,0,.2)
 }
 
 .header-container {
-    display: -webkit-flex;
-    display: -ms-flex;
     display: flex;
-    -ms-align-items: center;
+    justify-content: space-between;
     align-items: center;
+}
+
+@media only screen and (max-width: 680px) {
+    .header-container {
+        flex-direction: column;
+    }
 }
